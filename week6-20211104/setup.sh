@@ -1,3 +1,4 @@
 #!/bin/bash
 
-docker run nginx
+docker run -d nginx &
+docker run -d redis &
