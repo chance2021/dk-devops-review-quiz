@@ -5,7 +5,7 @@
 ```
 git clone https://github.com/chance2021/dk-devops-review-quiz.git
 ```
-4. **进入复习当周的文件夹**(week\<weekNumber>-\<YYYYMMDD>)，比如我们在2021年11月4日的第六周复习分享会，对应的文件夹就是(**week6-20211104**)
+4. **进入复习当周的文件夹**(week\<weekNumber>-\<YYYYMMDD>)，比如我们在2021年11月4日的第五周复习分享会，对应的文件夹就是(**week5-20211104**)
 ```
 cd dk-devops-review-quiz/week<weekNumber>-<YYYYMMDD>
 ```
