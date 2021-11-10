@@ -7,7 +7,8 @@ docker pull ubuntu
 docker run -d nginx &
 docker run -d redis &
 clear
-echo "Please wait 30s for the environment setup..."
-sleep 30s
-clear
+echo "Please wait 10s for the environment setup..."
+sleep 10s
+echo ""
+echo ""
 echo "The test environment is ready! Please go to the quiz to start your test! Good luck!"
