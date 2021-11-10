@@ -12,3 +12,4 @@ sleep 10s
 echo ""
 echo ""
 echo "The test environment is ready! Please go to the quiz to start your test! Good luck!"
+echo "Note: The quiz link should be sent to your email. Please contact Chance if you don't receive it. Thanks"
