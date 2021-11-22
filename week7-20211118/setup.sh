@@ -4,8 +4,10 @@ docker pull nginx
 docker pull redis
 docker pull hello-world
 docker pull ubuntu
+echo "This is week7!" > /usr/local/share/hello.txt
 docker run -d --name dk -p 8888:80 -v /usr/local/share:/etc/nginx nginx &
 docker run -d --name indoc -p 9999:6379 -p 7777:6378 redis &
+
 clear
 echo "Please wait 5s for the environment setup..."
 sleep 5s
