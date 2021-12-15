@@ -5,12 +5,8 @@
 ```
 git clone https://github.com/chance2021/dk-devops-review-quiz.git
 ```
-4. **进入复习当周的文件夹**(week\<weekNumber>-\<YYYYMMDD>)，比如我们在2021年11月4日的第五周复习分享会，对应的文件夹就是(**week5-20211104**)
+4. **运行环境部署脚本**
 ```
-cd dk-devops-review-quiz/week<weekNumber>-<YYYYMMDD>
+bash dk-devops-review-quiz/week10-20211209/setup.sh
 ```
-5. **运行环境部署脚本**
-```
-bash setup.sh
-```
-6. 等环境部署好之后，就可以通过邮件里的链接**开始答题**了
+5. 等环境部署好之后，就可以通过邮件里的链接**开始答题**了
