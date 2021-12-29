@@ -64,22 +64,25 @@ ip netns exec blud arp
 ip link add veth-red type veth peer name veth-blue
 ip link set veth-red netns red
 ip link set veth-blue netns blue
-ip netns exec red ip link
-ip netns exec blue ip link
+ip netns exec red ip addr
+ip netns exec blue ip addr
 ```
 
 ## 3. Assign IP to the virtual interfaces respectively
+```
 ip -n red addr add 192.168.15.1/24 dev veth-red
 ip -n blue addr add 192.168.15.2/24 dev veth-blue
 ip netns exec red ip addr
 ip netns exec blue ip addr
+```
 
 ## 4. Bring up the virtual interfaces respectively
+```
 ip -n red link set veth-red up
 ip -n blue link set veth-blue up
 ip netns exec red ip link
 ip netns exec blue ip link
-
+```
 
 ## 5. Verification
 ```
@@ -129,11 +132,13 @@ ping 192.168.15.1
 ```
 
 ## 4. Add route/iptables to allow the traffic to the external internet
+```
 ip netns exec blue ping 8.8.8.8
 ip netns exec blue route
 ip netns exec blue ip route add default via 192.168.15.5
 ip netns exec blue ping 8.8.8.8
 iptables -t nat -A POSTROUTING -s 192.168.15.0/24 -j MASQUERADE
+```
 
 > Note: If there is any internal host, for instance, 192.168.1.3, you need to add below route in the network namespace
 > ip netns exec blue ip route add 192.168.1.0/24 via 192.168.15.5
