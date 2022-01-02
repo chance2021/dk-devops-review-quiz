@@ -1,0 +1,119 @@
+# Lab1: How the docker volume works
+## 1. Create a docker volume
+```
+docker volume create data-1
+ls -l /var/lib/docker/volumes/
+ls -l /var/lib/docker/volumes/data-1/
+ls -l /var/lib/docker/volumes/data-1/_data
+```
+
+## 2. Run a container and use the volume created above
+```
+docker run -itd --name=container-1 --mount source=data-1,target=/data busybox
+```
+
+## 3. Create a text in the container
+```
+docker exec -it container-1 sh
+cd /data
+echo "Happy 2022" > 20220106.txt
+cat /data/20220106.txt
+exit
+cd /var/lib/docker/volumes/data-1/_data
+cat 20220106.txt
+```
+
+---
+# Lab2: How AUFS filesystem works
+## 1. Change the storage driver to aufs in daemon.json
+```
+docker info|grep -i storage
+vim /etc/docker/daemon.json
+{
+  "storage-driver": "aufs"
+}
+
+
+systemctl restart docker
+docker info|grep -i storage
+```
+
+## 2. Create the folders for images/container/mnt respectively
+```
+cd /tmp
+mkdir aufs
+cd aufs
+ mkdir mnt image-1 image-2 container-1
+echo "This is container-1" > container-1/container1.txt
+echo "This is image 1" > image-1/image1.txt
+echo "This is image 2" > image-2/image2.txt
+tree .
+```
+
+## 3. Mount the aufs folder as AUFS filesystem
+```
+cd /tmp/aufs
+mount -t aufs -o dirs=./container-1:./image-2:./image-1  none  ./mnt
+mount -t aufs
+cat /sys/fs/aufs/
+cat /sys/fs/aufs/si_????/*
+ls -l /tmp/aufs/mnt
+```
+
+## 4. Update the image file in mnt folder and compare to the same file in the container/image folders
+```
+ls /tmp/aufs/container-1/
+echo "New content" >  /tmp/aufs/mnt/image1.txt
+cat /tmp/aufs/image-1/image1.txt
+cat /tmp/aufs/container-1/image1.txt
+```
+
+---
+# Lab 3: How overlay2 filesystem works
+## 1. Configure overlay2 mode in docker
+```
+docker info |grep -i storage
+sudo systemctl stop docker
+sudo cp -au /var/lib/docker  /var/lib/docker.bak
+
+vi /etc/docker/daemon.json
+{
+  "storage-driver": "overlay2",
+  "storage-opts": [
+    "overlay2.size=20G",
+    "overlay2.override_kernel_check=true"
+  ]
+}
+
+sudo systemctl start docker
+
+docker info |grep -i storage
+```
+>> Note: If you are using Katakoda, please use overlay instead
+```
+vi /etc/docker/daemon.json
+{
+  "storage-driver": "overlay",
+}
+```
+
+## 2. Mount a folder as overlay filesystem
+```
+cd /tmp/
+mkdir overlay
+cd overlay
+mkdir -p lower1/a  lower1/b
+mkdir -p lower2/a  lower2/c
+mkdir -p upper/b  upper/d
+mkdir -p work merged
+tree /tmp/overlay
+mount -t overlay overlay -o lowerdir=lower1:lower2,upperdir=upper,workdir=work merged
+tree /tmp/overlay
+```
+
+## 3. Create a file in merged folder and you will see the file appear in upper folder as well
+```
+cd /tmp/overlay/merged/a 
+echo 'hello' > test
+find /tmp/overlay -name test
+```
