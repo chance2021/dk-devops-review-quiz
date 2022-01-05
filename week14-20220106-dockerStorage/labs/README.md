@@ -43,7 +43,7 @@ docker info|grep -i storage
 cd /tmp
 mkdir aufs
 cd aufs
- mkdir mnt image-1 image-2 container-1
+mkdir mnt image-1 image-2 container-1
 echo "This is container-1" > container-1/container1.txt
 echo "This is image 1" > image-1/image1.txt
 echo "This is image 2" > image-2/image2.txt
@@ -55,7 +55,7 @@ tree .
 cd /tmp/aufs
 mount -t aufs -o dirs=./container-1:./image-2:./image-1  none  ./mnt
 mount -t aufs
-cat /sys/fs/aufs/
+ls /sys/fs/aufs/
 cat /sys/fs/aufs/si_????/*
 ls -l /tmp/aufs/mnt
 ```
@@ -78,6 +78,16 @@ sudo cp -au /var/lib/docker  /var/lib/docker.bak
 
 vi /etc/docker/daemon.json
 {
+  "storage-driver": "overlay",
+}
+sudo systemctl start docker
+
+docker info |grep -i storage
+```
+>> Note: If you are not using Katakoda, please use overlay2 instead
+```
+vi /etc/docker/daemon.json
+{
   "storage-driver": "overlay2",
   "storage-opts": [
     "overlay2.size=20G",
@@ -85,16 +95,6 @@ vi /etc/docker/daemon.json
   ]
 }
 
-sudo systemctl start docker
-
-docker info |grep -i storage
-```
->> Note: If you are using Katakoda, please use overlay instead
-```
-vi /etc/docker/daemon.json
-{
-  "storage-driver": "overlay",
-}
 ```
 
 ## 2. Mount a folder as overlay filesystem
@@ -106,6 +106,12 @@ mkdir -p lower1/a  lower1/b
 mkdir -p lower2/a  lower2/c
 mkdir -p upper/b  upper/d
 mkdir -p work merged
+echo "This is lower1 a" > /tmp/overlay/lower1/a/a.txt
+echo "This is lower1 b" > /tmp/overlay/lower1/b/b.txt
+echo "This is lower2 a" > /tmp/overlay/lower2/a/a.txt
+echo "This is lower2 c" > /tmp/overlay/lower2/c/c.txt
+echo "This is upper b" > /tmp/overlay/upper/b/b.txt
+echo "This is upper d" > /tmp/overlay/upper/d/d.txt
 tree /tmp/overlay
 mount -t overlay overlay -o lowerdir=lower1:lower2,upperdir=upper,workdir=work merged
 tree /tmp/overlay
