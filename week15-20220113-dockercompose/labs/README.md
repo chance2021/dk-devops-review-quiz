@@ -48,6 +48,7 @@ docker network connect backend result-app
 You can access the voting-app website via [127.0.0.1:5000](http://127.0.0.1:5000)
 
 Once you click any option, the result-app website [127.0.0.1:5001](http://127.0.0.1:5001) will reflect the change.
+
 ---
 # Lab2: Build the website by docker compose
 
