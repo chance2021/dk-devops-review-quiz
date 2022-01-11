@@ -5,7 +5,10 @@
 # Lab1: How the docker volume works
 ## 1. Create a docker volume
 ```
+ls -l /var/lib/docker/volumes/
+
 docker volume create data-1
+
 ls -l /var/lib/docker/volumes/
 ls -l /var/lib/docker/volumes/data-1/
 ls -l /var/lib/docker/volumes/data-1/_data
@@ -32,6 +35,7 @@ cat 20220106.txt
 ## 1. Change the storage driver to aufs in daemon.json
 ```
 docker info|grep -i storage
+sudo cp -au /var/lib/docker  /var/lib/docker.bak1
 vim /etc/docker/daemon.json
 {
   "storage-driver": "aufs"
@@ -57,6 +61,7 @@ tree .
 ## 3. Mount the aufs folder as AUFS filesystem
 ```
 cd /tmp/aufs
+ls /sys/fs/aufs/
 mount -t aufs -o dirs=./container-1:./image-2:./image-1  none  ./mnt
 mount -t aufs
 ls /sys/fs/aufs/
@@ -71,6 +76,12 @@ echo "New content" >  /tmp/aufs/mnt/image1.txt
 cat /tmp/aufs/image-1/image1.txt
 cat /tmp/aufs/container-1/image1.txt
 ```
+## 5. Update the container file in mnt folder and compare to the same file in the container folder
+```
+cat /tmp/aufs/container-1/container1.txt
+echo "New content" >  /tmp/aufs/mnt/container1.txt
+cat /tmp/aufs/container-1/container1.txt
+```
 
 ---
 # Lab 3: How overlay2 filesystem works
@@ -78,7 +89,7 @@ cat /tmp/aufs/container-1/image1.txt
 ```
 docker info |grep -i storage
 sudo systemctl stop docker
-sudo cp -au /var/lib/docker  /var/lib/docker.bak
+sudo cp -au /var/lib/docker  /var/lib/docker.bak2
 
 vi /etc/docker/daemon.json
 {
@@ -126,4 +137,20 @@ tree /tmp/overlay
 cd /tmp/overlay/merged/a 
 echo 'hello' > test
 find /tmp/overlay -name test
+```
+
+## 4. Update a file existing in both lower1 and upper
+```
+echo "New content" > /tmp/overlay/merged/b/b.txt
+cat /tmp/overlay/upper/b/b.txt
+cat /tmp/overlay/lower1/b/b.txt
+```
+
+## 5. Update a file existing in lower2 but not in upper
+```
+tree /tmp/overlay
+echo "New content" > /tmp/overlay/merged/c/c.txt
+tree /tmp/overlay
+cat /tmp/overlay/lower2/c/c.txt
+cat /tmp/overlay/upper/c/c.txt
 ```
