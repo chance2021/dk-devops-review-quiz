@@ -1,3 +1,7 @@
+# 准备步骤
+1. 通过浏览器(Chrome/Firefox)**登入实验环境** [Docker Playground](https://katacoda.com/loodse/courses/docker/docker-01-playground)
+2. 点击"**START SCENARIO**"开启实验环境
+
 # Lab1: How the docker volume works
 ## 1. Create a docker volume
 ```
