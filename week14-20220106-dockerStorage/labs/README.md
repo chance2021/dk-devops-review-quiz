@@ -35,7 +35,7 @@ cat 20220106.txt
 ## 1. Change the storage driver to aufs in daemon.json
 ```
 docker info|grep -i storage
-sudo cp -au /var/lib/docker  /var/lib/docker.bak1
+sudo cp -au /etc/docker/daemon.json  /etc/docker/daemon.json.bak
 vim /etc/docker/daemon.json
 {
   "storage-driver": "aufs"
@@ -89,7 +89,7 @@ cat /tmp/aufs/container-1/container1.txt
 ```
 docker info |grep -i storage
 sudo systemctl stop docker
-sudo cp -au /var/lib/docker  /var/lib/docker.bak2
+sudo cp -au /etc/docker/daemon.json  /etc/docker/daemon.json.bak
 
 vi /etc/docker/daemon.json
 {
