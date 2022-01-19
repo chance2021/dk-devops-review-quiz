@@ -200,7 +200,7 @@ EOF
 
 ## 2. Deploy the stack yaml file
 ```
-docker stack deploy voting-app-stack --compose-file docker-stakc.yaml
+docker stack deploy voting-app-stack --compose-file docker-stack.yaml
 docker service ls
 docker service ps voting-app-stack_worker
 ```
