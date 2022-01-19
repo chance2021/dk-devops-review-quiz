@@ -154,14 +154,14 @@ docker network inspect dknet|more
 
 ## 2. Create a service and connect to dknet network
 ```
-docker service create --name=ingressservice --name=ingressservice --publish published=80,target=80 --replicas=2 --network=dknet yogeshraheja/kodekloudwebimage:v1
+docker service create --name=ingressservice --name=ingressservice --publish published=82,target=80 --replicas=2 --network=dknet yogeshraheja/kodekloudwebimage:v1
 docker service ls
 docker service ps ingressservice
 ```
 
 ## 3. Create a service with host mode and connect to dknet network
 ``` 
-docker service create --name=hostservice --publish published=82,target=80,mode=host --network=dknet --replicas=2 yogeshraheja/kodekloudwebimage:v1
+docker service create --name=hostservice --publish published=83,target=80,mode=host --network=dknet --replicas=2 yogeshraheja/kodekloudwebimage:v1
 docker service ls
 docker service ps hostservice
 ```
