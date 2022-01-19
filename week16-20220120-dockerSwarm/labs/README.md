@@ -109,7 +109,7 @@ docker service ps firstservice
 
 ## 4. Create another service with 3 replicas
 ```
-docker service create --name=secondservice -p 80:80 --replicas=3 httpd:alpine
+docker service create --name=secondservice -p 81:80 --replicas=3 httpd:alpine
 docker service ls
 docker service ps secondservice
 ```
