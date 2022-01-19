@@ -98,7 +98,6 @@ docker service ls
 docker service ps firstservice
 docker service inspect firstservice --pretty|more
 docker service logs firstservice
-docker service ps firstservice
 ```
 
 ## 3. Remove the container and check the service statu. The service should bring up another container to replacing the previous one.
