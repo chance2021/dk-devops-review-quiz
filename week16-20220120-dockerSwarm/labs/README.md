@@ -195,7 +195,7 @@ services:
     image: dockersamples/examplevotingapp_result
     ports:
     - 5001:80
-EOF 
+EOF
 ```
 
 ## 2. Deploy the stack yaml file
