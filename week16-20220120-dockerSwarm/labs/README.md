@@ -125,6 +125,7 @@ docker service ps secondservice
 ```
 docker service update --replicas=3 secondservice
 docker service ls
+docker service ps secondservice
 ```
 
 ## 7. Upgrade the image version
