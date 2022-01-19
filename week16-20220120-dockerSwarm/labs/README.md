@@ -93,7 +93,7 @@ docker node ls
 
 ## 2. Create a service in the Swarm cluster
 ```
-docker service crate --name=firstservice -p 80:80 httpd:alpine
+docker service create --name=firstservice -p 80:80 httpd:alpine
 docker service ls
 docker service ps firstservice
 docker service inspect firstservice --pretty|more
