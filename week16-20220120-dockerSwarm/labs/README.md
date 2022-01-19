@@ -210,7 +210,6 @@ docker service ps voting-app-stack_worker
 ## 3. Update the replicas in the stack yaml file
 ```
 cd /tmp    
-mkdir voting-app-stack
 cd voting-app-stack
 cat > docker-stack.yaml << EOF 
 version: '3'
@@ -237,7 +236,7 @@ services:
     - 5001:80
 EOF
     
-docker stack deploy voting-app-stack --compose-file docker-stakc.yaml    
+docker stack deploy voting-app-stack --compose-file docker-stack.yaml    
 docker service ls
 docker service ps voting-app-stack_vote
 ```
