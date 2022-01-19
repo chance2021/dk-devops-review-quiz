@@ -100,7 +100,7 @@ docker service inspect firstservice --pretty|more
 docker service logs firstservice
 ```
 
-## 3. Remove the container and check the service statu. The service should bring up another container to replacing the previous one.
+## 3. Remove the container and check the service status. The service should bring up another container to replacing the previous one.
 ```
 docker container ls
 docker container rm -f <containerName>
