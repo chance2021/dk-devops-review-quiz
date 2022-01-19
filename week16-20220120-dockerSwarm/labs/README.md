@@ -202,7 +202,7 @@ EOF
 ```
 docker stack deploy voting-app-stack --compose-file docker-stack.yaml
 docker stack ls
-docker stack ps voting-app-stack_worker
+docker stack ps voting-app-stack
 docker service ls
 docker service ps voting-app-stack_worker
 ```
