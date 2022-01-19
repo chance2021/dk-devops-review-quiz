@@ -8,7 +8,7 @@
 ```
 cat /etc/*release*
 nproc
-free -m
+free -h
 docker --version
 systemctl status docker
 docker system info |grep -i swarm
@@ -82,7 +82,8 @@ docker node ls
 ```
 docker swarm unlock
 docker node ls
-``
+```
+
 ---
 # Lab3: Swarm operation
 ## 1. List node status
