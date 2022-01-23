@@ -9,6 +9,7 @@
 cat /etc/*release*
 nproc
 free -h
+df -h
 docker --version
 systemctl status docker
 docker system info |grep -i swarm
