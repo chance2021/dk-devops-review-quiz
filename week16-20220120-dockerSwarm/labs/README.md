@@ -143,6 +143,11 @@ docker service update --rollback secondservice
 docker service inspect secondservice --pretty|grep -i image
 ```
 
+## 9. Remove the service
+```
+docker service rm secondservice
+docker service ls
+```
 ---
 # Lab4: Ingress network
 ## 1. Create a overlay network
@@ -164,6 +169,22 @@ docker service ps ingressservice
 docker service create --name=hostservice --publish published=83,target=80,mode=host --network=dknet --replicas=2 yogeshraheja/kodekloudwebimage:v1
 docker service ls
 docker service ps hostservice
+```
+
+## 4. Remove the service
+```
+docker service rm hostservice
+docker service ls
+```
+
+## 5. Remove the network
+```
+docker network rm dknet
+```
+
+## 6. Remove unused networks
+```
+docker network prune
 ```
 
 ---
@@ -202,6 +223,7 @@ EOF
 ```
 docker stack deploy voting-app-stack --compose-file docker-stack.yaml
 docker stack ls
+docker stack services
 docker stack ps voting-app-stack
 docker service ls
 docker service ps voting-app-stack_worker
@@ -239,4 +261,9 @@ EOF
 docker stack deploy voting-app-stack --compose-file docker-stack.yaml    
 docker service ls
 docker service ps voting-app-stack_vote
+```
+
+## 4. Remove the stack
+```
+docker stack rm voting-app-stack
 ```
