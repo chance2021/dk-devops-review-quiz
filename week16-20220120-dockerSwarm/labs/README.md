@@ -1,6 +1,6 @@
-# 准备步骤
-1. 通过浏览器(Chrome/Firefox)**登入实验环境** [Docker Playground](https://katacoda.com/loodse/courses/docker/docker-01-playground)
-2. 点击"**START SCENARIO**"开启实验环境
+# Preparation
+1. Open your browser and go to [Docker Playground](https://katacoda.com/loodse/courses/docker/docker-01-playground)
+2. Click on **START SCENARIO** and follow below instructions for the labs
 
 ---
 # Lab1: Docker Swarm Setup
