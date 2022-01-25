@@ -176,7 +176,7 @@ docker service ls
 docker network rm dknet
 ```
 
-## 6. Remove unused networks
+## 5. Remove unused networks
 ```
 docker network prune
 ```
