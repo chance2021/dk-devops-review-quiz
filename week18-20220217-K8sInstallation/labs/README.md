@@ -1,3 +1,5 @@
+# Kubernetes Cluster Setup
+
 1. Ensure network setting is configured in the master node:
 ```
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
