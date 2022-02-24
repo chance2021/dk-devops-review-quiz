@@ -49,7 +49,7 @@ sudo systemctl status kubelet
 sudo systemctl status docker
 ```
 
-3. Initiate kube cluster
+4. Initiate kube cluster
 ```
 ifconfig |grep -A 1 eth0|grep inet|awk '{print $2}'|sed '/^$/d' # Checking the ip
 
@@ -60,12 +60,12 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && \
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ``` 
   
-4. Deploy network plugin
+5. Deploy network plugin
 ```
 kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s-1.11.yaml
 ```
 
-5. Install docker/kubectl/kubelet/kubeadm in worker node
+6. Install docker/kubectl/kubelet/kubeadm in worker node
 ```
 # ssh to the worker nodes and run below commands
 
@@ -111,7 +111,7 @@ sudo systemctl status kubelet
 sudo systemctl status docker
 ```
 
-5. Run the join token gotten from the master node in the worker node to join the worker node to the cluster
+7. Run the join token gotten from the master node in the worker node to join the worker node to the cluster
 ```
 # Running in master node
 kubeadm token create --print-join-command
@@ -120,7 +120,7 @@ kubeadm token create --print-join-command
 sudo kubeadm join 10.168.0.2:6443 --token <token> --discovery-token-ca-cert-hash <token>
 ```
 
-6. Setup a NFS server
+8. Setup a NFS server
 ```
 sudo apt-get update && \
 sudo apt install nfs-kernel-server -y && \
@@ -136,7 +136,7 @@ sudo systemctl restart nfs-kernel-server #restarting the NFS kernel
 
 ```
 
-7. (Unfinished) Install nfs provider
+9. (Unfinished) Install nfs provider
 ```
 # Method 1: Install Helm
 sudo apt install gnupg gnupg2 gnupg1 -y && \
@@ -154,7 +154,6 @@ helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs
             
 # Method 2: Apply  nfs-subdir-external-provisioner manifest (kubectl apply -f <below yaml file>)
 
-```
 NFS_IP=<Need to replace with NFS server IP>
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -275,7 +274,7 @@ roleRef:
 EOF
 ```
 
-8. Deploy K8s dashboard
+10. Deploy K8s dashboard
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc6/aio/deploy/recommended.yaml
 ```
