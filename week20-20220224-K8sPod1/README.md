@@ -18,7 +18,7 @@ git clone https://github.com/chance2021/dk-devops-review-quiz.git
 ```
 9. **运行**测试环境setup脚本
 ```
-cd dk-devops-review-quiz/week20-20220224-K8sPod1
+cd dk-devops-review-quiz/week20-20220224-K8sPod1 && \
 bash setup.sh
 ```
 10. **查看**所有测试Pods是否在Running状态，是的话就可以开始答题
