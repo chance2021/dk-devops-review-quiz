@@ -46,7 +46,7 @@ kubectl run test5 --image=hello-world -n mynamespace
 kubectl run test6 --image=centos8 -n mynamespace
 kubectl create deployment test7 --image=redis -n mynamespace
 kubectl create deployment test8 --image=nginxd -n mynamespace
-kubectl scale deployment test7 --repclias=3 -n mynamespace
+kubectl scale deployment test7 --replicas=3 -n mynamespace
 
 clear
 echo "Please wait 15s for the environment setup..."
