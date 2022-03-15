@@ -10,7 +10,7 @@
 kubectl get nodes
 ```
 
-5. 打印Join token, 然后Copy & Paste到node01中，将node01加入到Cluster里
+5. 打印**Join token**, 然后Copy & Paste到node01中，将node01加入到Cluster里
 ```
 kubeadm token create  --print-join-command
 ```
