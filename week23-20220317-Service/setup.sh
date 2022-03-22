@@ -32,6 +32,7 @@ metadata:
   creationTimestamp: null
   labels:
     run: test3
+    type: ssd
   name: test3
   namespace: mynamespace
 spec:
@@ -41,12 +42,12 @@ spec:
   - image: nginx
     name: test3-2
 EOF
-kubectl expose pod test3 --target-port=6379 --port=80
+kubectl expose pod test3 --target-port=6379 --port=80 -n mynamespace
 kubectl run test4 --image=redis123 -n mynamespace
 kubectl run test5 --image=hello-world -n mynamespace
 kubectl run test6 --image=centos8 -n mynamespace
 kubectl create deployment test7 --image=redis -n mynamespace
-kubectl create deployment test8 --image=nginxd -n mynamespace
+kubectl create deployment test8 --image=nginx -n mynamespace
 kubectl scale deployment test7 --replicas=3 -n mynamespace
 
 clear
