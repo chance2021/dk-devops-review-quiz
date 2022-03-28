@@ -49,8 +49,48 @@ kubectl run test6 --image=centos8 -n mynamespace
 kubectl create deployment test7 --image=redis -n mynamespace
 kubectl create deployment test8 --image=nginx -n mynamespace
 kubectl scale deployment test7 --replicas=3 -n mynamespace
-kubectl create sts test9 --image=nginx --replicas=4
 
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Service
+metadata:
+  name: test9
+  namespace: test9
+  labels:
+    app: nginx
+spec:
+  ports:
+  - port: 80
+    name: web
+  clusterIP: None
+  selector:
+    app: nginx
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test9
+  namespace: mynamespace
+spec:
+  selector:
+    matchLabels:
+      app: test9 
+  serviceName: "test9"
+  replicas: 3 # by default is 1
+  minReadySeconds: 10 # by default is 0
+  template:
+    metadata:
+      labels:
+        app: test9
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: test
+        image: k8s.gcr.io/nginx-slim:0.8
+        ports:
+        - containerPort: 80
+          name: web
+EOF
 clear
 echo "Please wait 15s for the environment setup..."
 sleep 15s
