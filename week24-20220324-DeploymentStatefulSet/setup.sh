@@ -55,16 +55,16 @@ apiVersion: v1
 kind: Service
 metadata:
   name: test9
-  namespace: test9
+  namespace: mynamespace
   labels:
-    app: nginx
+    app: test9
 spec:
   ports:
   - port: 80
     name: web
   clusterIP: None
   selector:
-    app: nginx
+    app: test9
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -77,7 +77,6 @@ spec:
       app: test9 
   serviceName: "test9"
   replicas: 3 # by default is 1
-  minReadySeconds: 10 # by default is 0
   template:
     metadata:
       labels:
