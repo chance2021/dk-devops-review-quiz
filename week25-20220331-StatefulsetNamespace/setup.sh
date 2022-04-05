@@ -52,6 +52,8 @@ kubectl run test6 --image=centos8 -n mynamespace
 kubectl run blue --image=nginx -n prod
 kubectl run db-service --image=postgres -n prod
 kubectl expose pod db-service -n prod --port=5432 --target-port=5432
+kubectl run db-service --image=postgres -n mynamespace
+kubectl expose pod db-service -n mynamespace --port=5432 --target-port=5432
 kubectl run db-service --image=postgres -n staging
 kubectl create deployment test7 --image=redis -n mynamespace
 kubectl create deployment test8 --image=nginx -n mynamespace
