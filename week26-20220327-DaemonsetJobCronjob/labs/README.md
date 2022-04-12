@@ -58,7 +58,7 @@ And **apply** the cronjob object:
 kubectl apply -f healthcheck-cronjob.yaml
 ```
 
-4. To **verify**, Wait for another minute and check if the pod is completed successfully. If so, **check the log** to see if the output is expected (should be showing "succeeded").
+4. To **verify**, wait for another minute and check if the pod is completed successfully. If so, **check the log** to see if the output is expected (should be showing "succeeded").
 ```
 kubectl -n default logs -f healthcheck-????
 ```
