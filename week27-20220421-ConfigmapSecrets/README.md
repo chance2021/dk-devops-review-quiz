@@ -28,3 +28,4 @@ bash setup.sh
 ```
 kubectl get pods -n mynamespace
 ```
+> Tip: You can use command `kubectl explain pods --recursive |less` to check the pod's YAML template
