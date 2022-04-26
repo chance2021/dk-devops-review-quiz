@@ -1,3 +1,4 @@
+# kubectl -n mynamespace create cm webapp-config-map --from-literal=APP_COLOR=darkblue 
 apiVersion: v1
 data:
   APP_COLOR: darkblue
