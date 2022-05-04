@@ -78,7 +78,7 @@ kubectl get pods -n mynamespace
 ```
 kubectl get pods test4 -n mynamespace -o yaml > test4-pod.yaml
 ```
-2. 修改`test4-pod.yaml`里`spec.containers.resources.requests.memory`值，改为`20Mi`
+2. 修改`test4-pod.yaml`里`spec.containers.resources.limits.memory`值，改为`20Mi`
 
 3. 删除Pod test4
 ```
