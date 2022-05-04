@@ -174,22 +174,27 @@ kubectl label node node01 color=blue
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test6
+  name: test7
   namespace: mynamespace
 spec:
   replicas: 3
   selector:
     matchLabels:
-      run: test6
+      run: test7
   template:
     metadata:
       labels:
-        run: ngin6
+        run: test7
     spec:
       containers:
       - image: nginx
         imagePullPolicy: Always
-        name: test6
+        name: test7
+      tolerations:
+      - key: "spray"
+        value: "mortein"
+        operator: "Equal"
+        effect: "NoSchedule" 
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -199,4 +204,9 @@ spec:
                 operator: In
                 values:
                 - blue
+```
+
+运行以下命令查看Pod test7是否调度到了Node01上
+```
+kubectl get pods -n mynamespace  -o wide
 ```
