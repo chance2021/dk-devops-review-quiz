@@ -24,3 +24,4 @@ bash setup.sh
 kubectl get pods -n mynamespace
 ```
 > Tip: You can use command `kubectl explain pods --recursive |less` to check the pod's YAML template
+> Tip: 如有疑问，可以随时参考官方文档[点击这里](https://kubernetes.io/docs/concepts/)
