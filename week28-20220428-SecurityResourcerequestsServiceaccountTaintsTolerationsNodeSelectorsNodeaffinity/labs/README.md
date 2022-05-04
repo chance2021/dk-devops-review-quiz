@@ -27,9 +27,7 @@ spec:
     runAsUser: 1010
   containers:
   -  image: nginx
-     name: test22
-     securityContext:
-      runAsUser: 1002
+     name: test2
 ```
 
 ## 3. Update pod test2 to run as Root user and with the SYS_TIME capability.
