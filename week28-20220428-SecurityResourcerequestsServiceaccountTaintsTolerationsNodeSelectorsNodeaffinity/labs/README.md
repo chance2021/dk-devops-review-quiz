@@ -26,8 +26,9 @@ spec:
   securityContext:
     runAsUser: 1010
   containers:
-  -  image: nginx
+  -  image: ubuntu
      name: test2
+     command: [ "sh","-c","sleep 5000" ]
 ```
 
 ## 3. Update pod test2 to run as Root user and with the SYS_TIME capability.
