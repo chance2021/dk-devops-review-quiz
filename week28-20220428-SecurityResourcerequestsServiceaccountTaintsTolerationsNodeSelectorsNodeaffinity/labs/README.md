@@ -132,7 +132,7 @@ kubectl run test5 --image=nginx -n mynamespace
 kubectl get pods -n mynamespace
 ```
 
-## 11. Create another pod named bee with the nginx image in mynamespace, which has a toleration set to the taint mortein. Check the status of the pod.
+## 11. Create another pod named test6 with the nginx image in mynamespace, which has a toleration set to the taint mortein. Check the status of the pod.
 > 注：这题主要考察的是如何创建一个Pod能够被调度到已经被taint的了node上
 
 **Hint:**
@@ -143,11 +143,11 @@ kubectl get pods -n mynamespace
 apiVersion: v1
 kind: Pod
 metadata:
-  name: test5
+  name: test6
   namespace: mynamespace
 spec:
   containers:
-  - name: test5
+  - name: test6
     image: nginx
   tolerations:
   - key: "spray"
