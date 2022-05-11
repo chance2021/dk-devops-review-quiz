@@ -26,10 +26,9 @@ spec:
   securityContext:
     runAsUser: 1010
   containers:
-  -  image: nginx
-     name: test22
-     securityContext:
-      runAsUser: 1002
+  -  image: ubuntu
+     name: test2
+     command: [ "sh","-c","sleep 5000" ]
 ```
 
 ## 3. Update pod test2 to run as Root user and with the SYS_TIME capability.
@@ -79,7 +78,7 @@ kubectl get pods -n mynamespace
 ```
 kubectl get pods test4 -n mynamespace -o yaml > test4-pod.yaml
 ```
-2. 修改`test4-pod.yaml`里`spec.containers.resources.requests.memory`值，改为`20Mi`
+2. 修改`test4-pod.yaml`里`spec.containers.resources.limits.memory`值，改为`20Mi`
 
 3. 删除Pod test4
 ```
@@ -133,7 +132,7 @@ kubectl run test5 --image=nginx -n mynamespace
 kubectl get pods -n mynamespace
 ```
 
-## 11. Create another pod named bee with the nginx image in mynamespace, which has a toleration set to the taint mortein. Check the status of the pod.
+## 11. Create another pod named test6 with the nginx image in mynamespace, which has a toleration set to the taint mortein. Check the status of the pod.
 > 注：这题主要考察的是如何创建一个Pod能够被调度到已经被taint的了node上
 
 **Hint:**
@@ -144,11 +143,11 @@ kubectl get pods -n mynamespace
 apiVersion: v1
 kind: Pod
 metadata:
-  name: test5
+  name: test6
   namespace: mynamespace
 spec:
   containers:
-  - name: test5
+  - name: test6
     image: nginx
   tolerations:
   - key: "spray"
@@ -175,22 +174,27 @@ kubectl label node node01 color=blue
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test6
+  name: test7
   namespace: mynamespace
 spec:
   replicas: 3
   selector:
     matchLabels:
-      run: test6
+      run: test7
   template:
     metadata:
       labels:
-        run: ngin6
+        run: test7
     spec:
       containers:
       - image: nginx
         imagePullPolicy: Always
-        name: test6
+        name: test7
+      tolerations:
+      - key: "spray"
+        value: "mortein"
+        operator: "Equal"
+        effect: "NoSchedule" 
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -200,4 +204,9 @@ spec:
                 operator: In
                 values:
                 - blue
+```
+
+运行以下命令查看Pod test7是否调度到了Node01上
+```
+kubectl get pods -n mynamespace  -o wide
 ```
