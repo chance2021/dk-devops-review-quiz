@@ -50,6 +50,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: yellow
+  namespace: mynamespace
 spec:
   containers:
   - name: lemon
