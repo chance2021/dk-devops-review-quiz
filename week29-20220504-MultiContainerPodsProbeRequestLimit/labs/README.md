@@ -105,6 +105,8 @@ EOF
 kubectl -n mynamespace get pods -l env=dev
 ```
 
+可以看到只有test3和test4 Pod符合标准
+
 ## 8. How many objects are in bu=IT including PODs, ReplicaSets and any other objects?
 > 注：这题考察的和上一题基本类似，只是需要从包括Pods在内的其他objects里进行筛选
 
