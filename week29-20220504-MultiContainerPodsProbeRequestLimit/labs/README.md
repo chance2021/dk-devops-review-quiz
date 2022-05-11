@@ -144,4 +144,4 @@ kubectl create -f .
 ```
 kubectl -n mynamespace top pod
 ```
-Pod blue应该是消耗Memory最多的Pod
+Pod **blue**应该是消耗Memory最多的Pod
