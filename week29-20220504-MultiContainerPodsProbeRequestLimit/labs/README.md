@@ -105,7 +105,7 @@ EOF
 kubectl -n mynamespace get pods -l env=dev
 ```
 
-可以看到只有test3和test4 Pod符合标准
+可以看到只有test3和test4 Pod符合标准,所以答案选**2**个Pod
 
 ## 8. How many objects are in bu=IT including PODs, ReplicaSets and any other objects?
 > 注：这题考察的和上一题基本类似，只是需要从包括Pods在内的其他objects里进行筛选
@@ -115,6 +115,8 @@ kubectl -n mynamespace get pods -l env=dev
 ```
 kubectl -n mynamespace get all -l bu=IT
 ```
+可以看到只有test3,test4,test5 Pod符合标准,所以答案选**3**个Pod
+
 
 ## 9. Identify the node that consumes the most CPU.
 > 注：这题考察的是如何观察node的资源使用情况
@@ -125,6 +127,15 @@ kubectl -n mynamespace get all -l bu=IT
 kubectl top node
 ```
 
+如果运行命令的时候遇到报错`Error from server (NotFound): the server could not find the requested resource (get services http:heapster:)`, 说明集群中没有安装metrics监控组件，你可以运行以下命令安装组件：
+```
+git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
+cd kubernetes-metrics-server
+kubectl create -f .
+```
+确保所有监控Pod正常运行之后，再运行一下上面的命令,你会发现`controlplane`占用了最多CPU资源
+
+
 ## 10. Identify the POD in mynamespace that consumes the most Memory.
 > 注：这题考察的是如何观察pod的资源使用情况
 
@@ -133,5 +144,4 @@ kubectl top node
 ```
 kubectl -n mynamespace top pod
 ```
-
-
+Pod blue应该是消耗Memory最多的Pod
