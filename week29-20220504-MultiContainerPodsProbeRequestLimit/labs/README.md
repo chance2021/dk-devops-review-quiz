@@ -4,6 +4,7 @@
 > 注：这题考察的是如何观察一个Pod里的详细信息，包括有多少个Containers
 
 **Hint:**
+
 运行`kubectl -n mynamespace describe pods red`,然后观察`container`区域里有多少个container. 这里应该能看到3个containers,分别是：apple, wine, scarlet
 
 ## 2. 常见的Multi-Container Pod Design Patterns有哪些？
@@ -39,7 +40,7 @@ EOF
 
 1. 删除Pod yellow
 ```
-kubectl delete pod yellow
+kubectl -n mynamespace delete pod yellow
 ```
 
 2. 运行以下命令
