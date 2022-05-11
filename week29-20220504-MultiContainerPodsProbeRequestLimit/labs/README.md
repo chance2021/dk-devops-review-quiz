@@ -35,7 +35,7 @@ spec:
 EOF
 ```
 
-## 4. Edit pod yellow to mount all containers to the same volume (hostPath to /var/log/)
+## 4. Edit pod yellow to mount all containers to the same volume (hostPath to /var/log)
 > 注：这题考察的是如何将Pod mount到指定Volume上
 
 1. 删除Pod yellow
