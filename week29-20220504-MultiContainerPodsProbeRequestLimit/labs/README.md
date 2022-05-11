@@ -12,7 +12,7 @@
 **Hint:**
 应该选择Sidecar,Adapter, Ambassador
 
-## 3. Use the spec given below to create a multi-container pod with 2 containers.Pod name: yellow, Container 1 Name: lemon, Container 1 Image: busybox, Container 1 Command line: sleep 1000; Container 2 Name: gold, Container 2 Image: redis
+## 3. Use the spec given below to create a multi-container pod with 2 containers.Pod name: yellow, Namespace: mynamespace, Container 1 Name: lemon, Container 1 Image: busybox, Container 1 Command line: sleep 1000; Container 2 Name: gold, Container 2 Image: redis
 > 注：这题考察的是如何在一个Pod里创建多个containers
 
 **Hint:**
@@ -23,6 +23,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: yellow
+  namespace: mynamespace
 spec:
   containers:
   - name: lemon
