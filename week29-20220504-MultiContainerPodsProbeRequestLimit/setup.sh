@@ -15,7 +15,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: red
-  namespace: default
+  namespace: mynamespace
 spec:
   containers:
   - command:
@@ -101,17 +101,14 @@ kind: Pod
 metadata:
   name: test3
   namespace: mynamespace
+  labels:
+    env: dev
+    tier: frontend
+    bu: IT
 spec:
   containers:
   - image: nginx
     name: test3
-    resources:
-      requests:
-        memory: "64Mi"
-        cpu: "0.3"
-      limits:
-        memory: "128Mi"
-        cpu: "0.5"
 EOF
 
 
@@ -121,24 +118,31 @@ kind: Pod
 metadata:
   name: test4
   namespace: mynamespace
+  labels:
+    env: dev
+    tier: frontend
+    bu: IT
 spec:
   containers:
   - image: nginx
-    name: test4
-    resources:
-      requests:
-        memory: "4Mi"
-        cpu: "0.3"
-      limits:
-        memory: "5Mi"
-        cpu: "0.5"
+    name: test3
 EOF
 
-# Create Service Account
-kubectl -n default create sa test1
-kubectl -n default create sa test2
-kubectl -n default create sa test3
-
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test5
+  namespace: mynamespace
+  labels:
+    env: prod
+    tier: backend
+    bu: IT
+spec:
+  containers:
+  - image: nginx
+    name: test3
+EOF
 
 clear
 echo "Please wait 15s for the environment setup..."
