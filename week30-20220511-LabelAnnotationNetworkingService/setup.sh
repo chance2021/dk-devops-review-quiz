@@ -144,6 +144,55 @@ spec:
     name: test3
 EOF
 
+# Create deployment
+cat <<EOF | kubectl apply -f -
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test6
+  namespace: mynamespace
+  labels:
+    app: test6
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: test6
+  template:
+    metadata:
+      labels:
+        app: test6
+    spec:
+      containers:
+      - name: test6
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+EOF
+
+cat <<EOF | kubectl apply -f -
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test7
+  namespace: mynamespace
+  labels:
+    app: test7
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: test7
+  template:
+    metadata:
+      labels:
+        app: test7
+    spec:
+      containers:
+      - name: test7
+        image: redis
+EOF
+
 clear
 echo "Please wait 15s for the environment setup..."
 sleep 15s
