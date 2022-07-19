@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out repo
-      users: actions/checkout@v2
+      uses: actions/checkout@v2
